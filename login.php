@@ -13,6 +13,8 @@
         <button type="submit">Zaloguj sie</button>
     </form>
 
+    <script src="/boutique-en-ligne/assets/js/utils.js"></script>
+
     <script>
         const loginUser = async (e) => {
             e.preventDefault();
@@ -35,9 +37,9 @@
                 document.querySelector('#errors_list').innerHTML = response.errors.map(error => `<li>${error}</li>`).join('')
             }
             else{
-                localStorage.setItem('logged', 1);
+                setCookie('logged', 'true', 1);
                 if(response.user.admin === 1){
-                    localStorage.setItem('admin', 1);
+                    setCookie('admin', 'true', 1);
                 }
 
                 alert('Zostales zalgowany!');

@@ -22,7 +22,7 @@ class Register{
             $errors[] = 'Należy podać powtórzone hasło!';
         }
         if(!filter_var($formData->email, FILTER_VALIDATE_EMAIL)){
-            $errors[] = 'Podany adres email jest nieprawidłowy!';
+            $errors[] = 'Podany email jest nieprawidłowy!';
         }
         if($formData->password !== $formData->repeat_password){
             $errors[] = 'Podane hasła różnią się!';
