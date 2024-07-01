@@ -49,13 +49,13 @@ class Category{
     }
      
     public function deleteCategory($id){
-        $children = $this->getCategoriesWithChildren($id);
-        var_dump($this->getAllChildrenId())
+        // $children = $this->getCategoriesWithChildren($id);
+        // var_dump($this->getAllChildrenId())
 
-        $ids = [];
+        // $ids = [];
 
 
 
-        var_dump($children);
+        // var_dump($children);
     }
 }

@@ -42,7 +42,7 @@ input{
     opacity: 0.8;
 }
 .kid1{
-    margin-left: 5%;
+    margin-left: 20%;
 }
 .kid2{
     margin-right: 5%;
@@ -66,16 +66,18 @@ button:hover {
     height: 230px;
 }
 .spiral{
-    width: 70%;
+    width: 30%;
     height: auto;
     border-radius: 50%;
     animation: spin 5s linear infinite;
     opacity: 0.6;
+    margin-left: 15%;
 }
 h1{
    text-align: center;
    letter-spacing: 4px;
     color: rgb(228, 10, 134);
+    margin-top: 150px;
 }
 
 .img {

@@ -26,19 +26,20 @@
         </nav>
 
     </header>
-    <h1>Just a few more steps and you'll find yourself in chocolate madness</h1>   
+    <h1>Just a few more steps and you'll <br>find yourself in chocolate madness</h1>   
     <form id="registerForm">
         <div class="container">
             <div class="kid1">
+                <img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">
                 <p>email:</p><input type="email" name="email" /><br><br>
                 <p>password:</p><input type="password" name="password" /><br><br>
                 <p>repeat password:</p><input type="password" name="repeat_password" /><br>
             </div>
             <div class="img" id="errorContainer">
-                <img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">
-                <img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">
+
             </div>
             <div class="kid2">
+                <img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">
                 <p>nick:</p><input type="text" name="nick" /><br><br>
                 <p>name:</p><input type="text" name="name" /><br><br>
                 <p>address:</p><input type="text" name="address" /><br><br>
