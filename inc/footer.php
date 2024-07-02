@@ -2,7 +2,7 @@
 </div>
 </main>
 
-<footer class="bg-dark page-footer font-small blue pt-4">
+<footer class="bg-dark page-footer font-small blue pt-4 footer-bg">
 
     <div class="container-fluid text-center text-md-left">
 
@@ -16,13 +16,16 @@
                 <h5 class="text-white text-uppercase">Catégories</h5>
                 <ul class="list-unstyled">
                     <li>
-                        <a href="#" class="text-white"> Nos Tablettes</a>
+                        <a href="http://localhost/onlineshop_light/index.php?category=Chocolat" class="text-white"> Nos Tablettes</a>
                     </li>
                     <li>
-                        <a href="#" class="text-white"> Nos Créations</a>
+                        <a href="http://localhost/onlineshop_light/index.php?category=Cr%C3%A9ation" class="text-white"> Nos Créations</a>
                     </li>
                     <li>
-                        <a href="#" class="text-white"> Nos Confiseries</a>
+                        <a href="http://localhost/onlineshop_light/index.php?category=Confiserie" class="text-white"> Nos Confiseries</a>
+                    </li>
+                    <li>
+                        <a href="http://localhost/onlineshop_light/index.php?category=Main%20d%27oeuvre" class="text-white"> Achetez un Oompa Loompa</a>
                     </li>
                 </ul>
             </div>
@@ -34,19 +37,13 @@
                         <a href="contact.php" class="text-white"> Contact</a>
                     </li>
                     <li>
-                        <a href="index.php" class="text-white"> Boutique</a>
+                        <a href="shop.php" class="text-white"> Boutique</a>
                     </li>
                     <li>
                         <a href="cart.php" class="text-white"> Panier</a>
                     </li>
                     <li>
                         <a href="profile.php" class="text-white"> Mon Profil</a>
-                    </li>
-                    <li>
-                        <a href="connection.php" class="text-white"> Connection</a>
-                    </li>
-                    <li>
-                        <a href="registration.php" class="text-white"> Inscription</a>
                     </li>
                 </ul>
             </div>
@@ -55,9 +52,10 @@
 
     <div class="text-white footer-copyright text-center py-3">
         © 2024 Copyright
-        <a href="">Wonka Chocolat</a>
+        <a href="index.php"> Wonka </a>
     </div>
 </footer>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="./js/app.js"></script>

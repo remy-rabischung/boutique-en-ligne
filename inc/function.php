@@ -93,6 +93,41 @@
 
     }
 
+    function userConnected() {
+
+        if(isset($_SESSION["member"])) {
+            return true;
+        }
+        return false;
+
+    }
+
+    function pagination($pdo, $URLparam, $sqlText, $column, $nbrElemPerPage) {
+
+        if(isset($_GET[$URLparam]) && !empty($_GET[$URLparam])) {
+            $currentPage = (int) strip_tags($_GET[$URLparam]);
+        } else {
+            $currentPage = 1;
+        }
+
+        $sql = $sqlText;
+        $query = $pdo->prepare($sql);
+        $query->execute();
+        $result = $query->fetch();
+        $nbrElems = (int) $result[$column];
+        $perPage = $nbrElemPerPage;
+        $pages = ceil($nbrElems / $perPage);
+        $first= ($currentPage*$perPage) - $perPage;
+        $elemForPagination= [
+            "nbrElems" => $nbrElems,
+            "pages" => $pages,
+            "first" => $first,
+            "currentPage" => $currentPage
+        ];
+
+        return $elemForPagination;
+
+    }
 
 
 ?>

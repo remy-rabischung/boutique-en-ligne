@@ -10,8 +10,8 @@ $pdo = new PDO('mysql:host=localhost;dbname=onlineshop', 'root', '',
 
     require_once("function.php");
 
-    define("URL", "http://" . $_SERVER["HTTP_HOST"] . "/php/onlineshop/");
-    define("SITE_ROOT", $_SERVER["DOCUMENT_ROOT"] . "/php/onlineshop/");
+    define("URL", "http://" . $_SERVER["HTTP_HOST"] . "\boutique-en-ligne/");
+    define("SITE_ROOT", $_SERVER["DOCUMENT_ROOT"] . "\boutique-en-ligne/");
 
     $content = "";
 

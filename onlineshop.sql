@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le : lun. 03 avr. 2023 à 14:31
--- Version du serveur : 5.7.34
--- Version de PHP : 8.0.8
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mar. 02 juil. 2024 à 09:35
+-- Version du serveur : 8.3.0
+-- Version de PHP : 8.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,40 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `comments`
---
-
-CREATE TABLE `comments` (
-  `id_comment` int(11) NOT NULL,
-  `id_member` int(11) NOT NULL,
-  `id_product` int(11) NOT NULL,
-  `comment` varchar(250) DEFAULT NULL,
-  `date` date NOT NULL,
-  `state` enum('in progress','validated','rejected') DEFAULT NULL,
-  `grade` enum('1','2','3','4','5') DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `contact`
 --
 
-CREATE TABLE `contact` (
-  `id_contact` int(11) NOT NULL,
-  `id_member` int(11) DEFAULT NULL,
+DROP TABLE IF EXISTS `contact`;
+CREATE TABLE IF NOT EXISTS `contact` (
+  `id_contact` int NOT NULL AUTO_INCREMENT,
+  `id_member` int DEFAULT NULL,
   `first_name` varchar(45) NOT NULL,
   `last_name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `phone_number` int(11) NOT NULL,
+  `phone_number` int NOT NULL,
   `message` longtext NOT NULL,
   `subject` varchar(250) NOT NULL,
   `date` date DEFAULT NULL,
   `state` enum('in progress','processed') DEFAULT 'in progress',
   `response` longtext,
   `response_state` enum('read','unread') NOT NULL DEFAULT 'unread',
-  `date_response` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date_response` date DEFAULT NULL,
+  PRIMARY KEY (`id_contact`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -65,8 +51,9 @@ CREATE TABLE `contact` (
 -- Structure de la table `members`
 --
 
-CREATE TABLE `members` (
-  `id_member` int(3) NOT NULL,
+DROP TABLE IF EXISTS `members`;
+CREATE TABLE IF NOT EXISTS `members` (
+  `id_member` int NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(20) NOT NULL,
   `password` varchar(60) NOT NULL,
   `name` varchar(20) NOT NULL,
@@ -76,10 +63,22 @@ CREATE TABLE `members` (
   `city` varchar(20) NOT NULL,
   `postal_code` int(5) UNSIGNED ZEROFILL NOT NULL,
   `address` varchar(50) NOT NULL,
-  `status` int(1) NOT NULL DEFAULT '0',
+  `status` int NOT NULL DEFAULT '0',
   `photo` varchar(250) DEFAULT NULL,
-  `phone_number` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `phone_number` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id_member`),
+  UNIQUE KEY `pseudo` (`pseudo`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `members`
+--
+
+INSERT INTO `members` (`id_member`, `pseudo`, `password`, `name`, `first_name`, `email`, `sexe`, `city`, `postal_code`, `address`, `status`, `photo`, `phone_number`) VALUES
+(1, 'Sam', 'toto', 'Habbani', 'Samih', 'mail@mail.com', 'm', 'Cannes', 06400, 'Rue d\'antibes', 0, NULL, '0676776641'),
+(6, 'ryme', '$2y$10$25n8zVQhBocWNM3M44dhieVPSlJ75QlmGsqTthxHz6vvVoRkw5nF6', 'Rbs', 'Remy', 'remy@mail.com', 'm', 'Cannes', 06400, 'Rue d\'antibes', 2, NULL, NULL),
+(7, 'John', '$2y$10$cyJHSkVflV5hgN1MZ7LsJuYMa1HPGVUuVEmjZoSKXXJba3WozqgPG', 'php', 'Remy', 'admin@example.com', 'm', 'Cannes', 06400, 'Rue d\'antibes', 2, NULL, NULL),
+(8, 'Samos2022', '$2y$10$ADCAAT1dnov4tOdH/y2iyOVZhccrndLr3seO6kS6FcpsL6FYqbZ6e', 'php', 'Rémy', 'admin@example.com', 'm', 'Cannes', 06400, 'Rue d\'antibes', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,13 +86,23 @@ CREATE TABLE `members` (
 -- Structure de la table `orders`
 --
 
-CREATE TABLE `orders` (
-  `id_order` int(3) NOT NULL,
-  `id_member` int(3) DEFAULT NULL,
-  `amount` int(3) NOT NULL,
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id_order` int NOT NULL AUTO_INCREMENT,
+  `id_member` int DEFAULT NULL,
+  `amount` int NOT NULL,
   `date` datetime NOT NULL,
-  `state` enum('in progress','sent','delivered') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `state` enum('en traitement','envoyé','livré') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`id_order`),
+  KEY `id_member` (`id_member`)
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `orders`
+--
+
+INSERT INTO `orders` (`id_order`, `id_member`, `amount`, `date`, `state`) VALUES
+(41, 1, 9990, '2024-07-02 09:18:00', 'en traitement');
 
 -- --------------------------------------------------------
 
@@ -101,13 +110,23 @@ CREATE TABLE `orders` (
 -- Structure de la table `order_details`
 --
 
-CREATE TABLE `order_details` (
-  `id_order_details` int(3) NOT NULL,
-  `id_order` int(3) DEFAULT NULL,
-  `id_product` int(3) DEFAULT NULL,
-  `quantity` int(3) NOT NULL,
-  `price` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `order_details`;
+CREATE TABLE IF NOT EXISTS `order_details` (
+  `id_order_details` int NOT NULL AUTO_INCREMENT,
+  `id_order` int DEFAULT NULL,
+  `id_product` int DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `price` int NOT NULL,
+  PRIMARY KEY (`id_order_details`),
+  KEY `id_order` (`id_order`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `order_details`
+--
+
+INSERT INTO `order_details` (`id_order_details`, `id_order`, `id_product`, `quantity`, `price`) VALUES
+(28, 41, 4, 10, 999);
 
 -- --------------------------------------------------------
 
@@ -115,116 +134,31 @@ CREATE TABLE `order_details` (
 -- Structure de la table `products`
 --
 
-CREATE TABLE `products` (
-  `id_product` int(3) NOT NULL,
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE IF NOT EXISTS `products` (
+  `id_product` int NOT NULL AUTO_INCREMENT,
   `reference` varchar(20) NOT NULL,
   `category` varchar(20) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `color` varchar(20) NOT NULL,
-  `size` varchar(5) NOT NULL,
-  `public` enum('m','f','all') NOT NULL,
   `picture` varchar(250) NOT NULL,
-  `price` int(3) NOT NULL,
-  `stock` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `price` int NOT NULL,
+  `stock` int NOT NULL,
+  PRIMARY KEY (`id_product`),
+  UNIQUE KEY `reference` (`reference`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `products`
 --
 
-INSERT INTO `products` (`id_product`, `reference`, `category`, `title`, `description`, `color`, `size`, `public`, `picture`, `price`, `stock`) VALUES
-(2, '31-p-33', 'T-shirt', 'Black original t-shirt', 'Nice original t-shirt', 'black', 'XL', 'm', 'http://localhost:8888/php/onlineshop/pictures/31-p-33_green_t-shirt.png', 25, 10),
-(3, '56-a-65', 'Shirt', 'White shirt', 'Classic white shirt', 'white', 'L', 'm', 'http://localhost:8888/php/onlineshop/pictures/white_shirt.png', 49, 1),
-(4, '77-p-79', 'Pullover', 'Grey pullover', 'Grey Pullover for winter', 'grey', 'XL', 'f', 'http://localhost:8888/php/onlineshop/pictures/grey_pullover.png', 79, 4),
-(5, '11-d-231', 'T-shirt', 'V-neck T-shirt', 'Dark blue t-shirt for men', 'dark blue', 'M', 'm', 'http://localhost:8888/php/onlineshop/pictures/blue_t-shirt.png', 44, 3),
-(6, '66-f-15_01', 'T-shirt', 'Red t-shirt', 'Red t-shirt for man', 'red', 'S', 'm', 'http://localhost:8888/php/onlineshop/pictures/red_t-shirt.png', 56, 5),
-(7, '88-g-77-01', 'T-shirt', 'Green t-shirt', 'Green t-shirt for man', 'green', 'L', 'm', 'http://localhost:8888/php/onlineshop/pictures/green_t-shirt.png', 29, 6),
-(8, '72-g-17-22', 'Shirt', 'Black shirt', 'Black shirt for man', 'green', 'L', 'm', 'http://localhost:8888/php/onlineshop/pictures/black_shirt.png', 39, 13);
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id_comment`);
-
---
--- Index pour la table `contact`
---
-ALTER TABLE `contact`
-  ADD PRIMARY KEY (`id_contact`);
-
---
--- Index pour la table `members`
---
-ALTER TABLE `members`
-  ADD PRIMARY KEY (`id_member`),
-  ADD UNIQUE KEY `pseudo` (`pseudo`);
-
---
--- Index pour la table `orders`
---
-ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id_order`),
-  ADD KEY `id_member` (`id_member`);
-
---
--- Index pour la table `order_details`
---
-ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id_order_details`),
-  ADD KEY `id_order` (`id_order`);
-
---
--- Index pour la table `products`
---
-ALTER TABLE `products`
-  ADD PRIMARY KEY (`id_product`),
-  ADD UNIQUE KEY `reference` (`reference`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `contact`
---
-ALTER TABLE `contact`
-  MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `members`
---
-ALTER TABLE `members`
-  MODIFY `id_member` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT pour la table `orders`
---
-ALTER TABLE `orders`
-  MODIFY `id_order` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-
---
--- AUTO_INCREMENT pour la table `order_details`
---
-ALTER TABLE `order_details`
-  MODIFY `id_order_details` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT pour la table `products`
---
-ALTER TABLE `products`
-  MODIFY `id_product` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+INSERT INTO `products` (`id_product`, `reference`, `category`, `title`, `description`, `picture`, `price`, `stock`) VALUES
+(2, '31-p-33', 'Création', 'Raspberry Velvet Tart', 'Une tartelette élégante composée d\'une pâte sablée au cacao, d\'une ganache au chocolat noir et de framboises fraîches, parsemée d\'éclats de pistache et de feuille d\'or comestible.', 'http://localhost:80/onlineshop_light/assets/choco-1.png', 14, 50),
+(3, '56-a-65', 'Chocolat', 'Tablette Wonka', 'La tablette Wonka est un produit phare de l\'usine de chocolat de Willy Wonka, connue pour son goût exceptionnel et ses emballages colorés. Chaque tablette peut contenir des surprises, comme des tickets d\'or permettant de visiter l\'usine. La tablette combine un chocolat riche et onctueux avec des inclusions variées, telles que des noix caramélisées ou des éclats de biscuit.', 'http://localhost:80/onlineshop_light/assets/effet-tabl1.png', 7, 5000),
+(4, '77-p-79', 'Main d\'oeuvre', 'Oompa Loompa', 'Les Oompa Loompas travaillent dans l\'usine de chocolat de Willy Wonka, où ils s\'occupent de diverses tâches liées à la fabrication et à l\'emballage des produits. Originaires de Loompaland, ils sont ramenés par Wonka pour leur expertise unique et en échange de leur travail, ils sont rémunérés en fèves de cacao, leur mets préféré. Ils sont connus pour leurs chants et danses, souvent utilisés pour transmettre des leçons morales.', 'http://localhost:80/onlineshop_light/assets/oompaloompa.gif', 999, 110),
+(5, '11-d-231', 'Creation', 'Caramel Lava Brownie', 'Un brownie riche et dense avec un cœur coulant de caramel salé, offrant une explosion de saveurs chocolatées et sucrées-salées.', 'http://localhost:80/onlineshop_light/assets/choco-2.png', 28, 42),
+(6, '66-f-15_01', 'Creation', 'Triple Choco Crunch Mousse', 'Une mousse légère et onctueuse en trois couches de chocolat (blanc, lait et noir), agrémentée de noisettes caramélisées pour une texture croquante et un goût de noisette grillée.', 'http://localhost:80/onlineshop_light/assets/choco-4.png', 12, 160),
+(7, '88-g-77-01', 'Confiserie', 'Fizzy Fruity Fizzles', 'Ces bonbons pétillants explosent en bouche avec des saveurs de fruits tropicaux. Ils offrent une expérience sensorielle unique grâce à leur texture effervescente et leurs couleurs vibrantes.', 'http://localhost:80/onlineshop_light/assets/bonbon2.jpg', 6, 400);
 
 --
 -- Contraintes pour les tables déchargées

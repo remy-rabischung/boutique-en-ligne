@@ -3,32 +3,66 @@
 // Accueil du BACK OFFICE
 
 require_once("../inc/init.php");
+
+if(isset($_GET["filterCommand"])) {
+    if(empty($_GET["id_order"])) {
+        $stmt = $pdo->query("SELECT * FROM orders  WHERE state = '$_GET[state]' ORDER BY id_order ASC LIMIT 0, 5");
+    } else {
+        $stmt = $pdo->query("SELECT * FROM orders WHERE id_order = '$_GET[id_order]' ");
+    }
+} else {
+    $stmt = $pdo->query("SELECT * FROM orders ORDER BY id_order ASC LIMIT 0, 5");
+
+}
+
+$state = (isset($_GET["filterCommand"])) && isset($_GET["state"]) ? $_GET["state"] : "";
+
+
 require_once("inc/header.php");
 
 ?>
 
 <!-- BODY -->
-<h1 class="mb-5 text-center">Welcome to the management of your orders in the backOffice</h1>
+<h1 class="mb-5 text-center">Bienvenue dans l'administration des commandes</h1>
 
 <div class="w-100"> </div>
 
-<h2>List of orders <span class="badge badge-secondary"></span></h2>
+<h2>Liste des commandes <span class="badge badge-secondary"><?= $state; ?></span></h2>
 
 <div class="w-100"> </div>
 
 <form class="row col-md-12 align-items-center justify-content-center m-5" method="get" action="">
     <input type="hidden" name="filterCommand">
     <select class="form-control col-md-4" name="state">
-        <option value="none" disabled="" selected=""> Choose type of order </option>
-        <option value="in progress"> In progress </option>
-        <option value="sent"> Sent </option>
-        <option value="delivered"> Delivered </option>
+
+        <?php if($state == "en traitement") { ?>
+            <option value="none" disabled=""> Choisissez un statut de commande </option>
+            <option value="en traitement" selected> En Traitement </option>
+            <option value="envoyé"> Envoyé </option>
+            <option value="livré"> Livré </option>
+        <?php } else if ($state == "envoyé") { ?>
+            <option value="none" disabled=""> Choisissez un statut de commande </option>
+            <option value="en traitement"> En Traitement </option>
+            <option value="envoyé" selected> Envoyé </option>
+            <option value="livré"> Livré </option>
+        <?php } else if ($state == "livré"){ ?>
+            <option value="none" disabled=""> Choisissez un statut de commande </option>
+            <option value="en traitement"> En Traitement </option>
+            <option value="envoyé"> Envoyé </option>
+            <option value="livré" selected> Livré </option>
+        <?php } else { ?>
+            <option value="none" disabled="" selected=""> Choisissez un statut de commande </option>
+            <option value="en traitement"> En Traitement </option>
+            <option value="envoyé"> Envoyé </option>
+            <option value="livré"> Livré </option>
+        <?php } ?>
+
     </select>
 
-    <p class="text-center mb-0 mr-3 ml-3">Or</p>
+    <p class="text-center mb-0 mr-3 ml-3">Ou</p>
 
     <input type="text" name="id_order" class="form-control col-md-4" id="id_order" aria-describedby="id_order"
-        placeholder="Enter an order number">
+        placeholder="Entrez un numéro de commande">
 
 </form>
 
@@ -36,101 +70,49 @@ require_once("inc/header.php");
 <table class="table mb-5">
     <thead class="thead-dark">
         <tr>
-            <th scope="col"> id_order </th>
-            <th scope="col"> id_member </th>
-            <th scope="col"> amount </th>
-            <th scope="col"> date </th>
-            <th scope="col"> state </th>
+            <?php for($i = 0; $i < $stmt->columnCount(); $i++) {
+                $col = $stmt->getColumnMeta($i); ?>
+                <th scope="col"> <?= $col["name"]; ?> </th>
+            <?php } ?>
         </tr>
     </thead>
     <tbody>
 
         <tr>
-            <td> 9</td>
-            <td> 1</td>
-            <td> 40</td>
-            <td> 2022-10-17 17:14:07</td>
-            <td>
-                <form method="post" action="">
-                    <input type="hidden" name="id_order" value="9">
-                    <input type="hidden" name="modifyState">
-                    <select class="form-control" name="state">
-                        <option value="in progress" selected=""> In progress </option>
-                        <option value="sent"> Sent </option>
-                        <option value="delivered"> Delivered </option>
-                    </select>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td> 10</td>
-            <td> 1</td>
-            <td> 75</td>
-            <td> 2022-10-17 17:17:01</td>
-            <td>
-                <form method="post" action="">
-                    <input type="hidden" name="id_order" value="10">
-                    <input type="hidden" name="modifyState">
-                    <select class="form-control" name="state">
-                        <option value="in progress"> In progress </option>
-                        <option value="sent"> Sent </option>
-                        <option value="delivered" selected=""> Delivered </option>
-                    </select>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td> 11</td>
-            <td> 1</td>
-            <td> 49</td>
-            <td> 2022-10-17 17:20:36</td>
-            <td>
-                <form method="post" action="">
-                    <input type="hidden" name="id_order" value="11">
-                    <input type="hidden" name="modifyState">
-                    <select class="form-control" name="state">
-                        <option value="in progress"> In progress </option>
-                        <option value="sent" selected=""> Sent </option>
-                        <option value="delivered"> Delivered </option>
-                    </select>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td> 12</td>
-            <td> 1</td>
-            <td> 151</td>
-            <td> 2022-10-17 17:23:37</td>
-            <td>
-                <form method="post" action="">
-                    <input type="hidden" name="id_order" value="12">
-                    <input type="hidden" name="modifyState">
-                    <select class="form-control" name="state">
-                        <option value="in progress"> In progress </option>
-                        <option value="sent"> Sent </option>
-                        <option value="delivered" selected=""> Delivered </option>
-                    </select>
-                </form>
-            </td>
-        </tr>
-        <tr>
-            <td> 13</td>
-            <td> 1</td>
-            <td> 98</td>
-            <td> 2022-10-17 17:30:15</td>
-            <td>
-                <form method="post" action="">
-                    <input type="hidden" name="id_order" value="13">
-                    <input type="hidden" name="modifyState">
-                    <select class="form-control" name="state">
-                        <option value="in progress" selected=""> In progress </option>
-                        <option value="sent"> Sent </option>
-                        <option value="delivered"> Delivered </option>
-                    </select>
-                </form>
-            </td>
-        </tr>
+            <?php foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $index => $order) { 
+                foreach($order as $index => $value) {
+                    if ($index == "state") { ?>
+                        <td>
+                            <form method="post" action="">
+                                <input type="hidden" name="id_order" value="9">
+                                <input type="hidden" name="modifyState">
+                                <select class="form-control" name="state">
+                                <?php if($value == "en traitement") { ?>
+                                    <option value="en traitement" selected> En Traitement </option>
+                                    <option value="envoyé"> Envoyé </option>
+                                    <option value="livré"> Livré </option>
+                                <?php } else if ($value == "envoyé") { ?>
+                                    <option value="en traitement"> En Traitement </option>
+                                    <option value="envoyé" selected> Envoyé </option>
+                                    <option value="livré"> Livré </option>
+                                <?php } else { ?>
+                                    <option value="en traitement"> En Traitement </option>
+                                    <option value="envoyé"> Envoyé </option>
+                                    <option value="livré" selected> Livré </option>
+                                <?php } ?>
 
+                                </select>
+                            </form>
+                        </td>
+                        
+                    <?php } else { ?>
+                        <td> <?= $order[$index]; ?> </td>
+                    <?php } ?>
+
+            <?php } ?>
+                </tr>
+            <?php } ?>
+ 
     </tbody>
 </table>
 

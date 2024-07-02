@@ -23,46 +23,44 @@
     require_once("inc/header.php");
 ?>
 
-<!-- Body content -->
-
-<div class="col-md-3">
-    <ul class="list-group">
-
-        <?php while($category = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-            
-            <li class="list-group-item">
-                <a class="text-dark" href="?category=<?=$category['category'];?>"> <?= $category['category']; ?></a>
-            </li>
-
-        <?php } ?>
-
-
-    </ul>
-</div>
-
-<div class="row col-md-9">
-    <?php
-        if(isset($_GET['category'])) {
-            while($product = $query->fetch(PDO::FETCH_ASSOC)) { ?>
-
-                <div class="col-md-4 pr-2 pl-2 pb-2">
-                    <div class="card">
-                        <img src="<?= $product['picture']; ?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-center"> <?= $product['title']; ?> </h5>
-                            <p class="card-text text-center"> <?= $product['description']; ?> </p>
-                            <a href="product_info.php?id_product=<?= $product['id_product']; ?>" class="btn btn-dark d-flex justify-content-center">Voir le produit</a>
-                        </div>
-                    </div>
+<div class="container mt-5">
+    <div class="text-center text-light">
+        <h1>Bienvenue chez Wonka!</h1>
+        <p>Tentez votre chance en achetant des Tablettes Wonka pour gagner un Ticket d'Or!</p>
+        <a href="shop.php" class="btn btn-primary btn-lg">Visitez la boutique</a>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card card-custom">
+                <img src="assets/choco-2.png" class="card-img-top" alt="Creation">
+                <div class="card-body">
+                    <h5 class="card-title">Caramel Lava Brownie</h5>
+                    <p class="card-text">Essayez cette exquise création!</p>
+                    <a href="http://localhost/boutique-en-ligne/product_info.php?id_product=5" class="btn btn-primary">Acheter</a>
                 </div>
-    <?php }
-
-    } else { ?>
-
-        <p> Choisissez une catégorie.</p>
-
-    <?php } ?>
- 
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-custom">
+                <img src="assets/bonbon2.jpg" class="card-img-top" alt="Bonbon">
+                <div class="card-body">
+                    <h5 class="card-title">Fizzy Fruity Fizzles</h5>
+                    <p class="card-text">Ces bonbons pétillants explosent en bouche avec des saveurs de fruits tropicaux.</p>
+                    <a href="http://localhost/boutique-en-ligne/product_info.php?id_product=7" class="btn btn-primary">Acheter</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-custom">
+                <img src="assets/choco-4.png" class="card-img-top" alt="Chocolat">
+                <div class="card-body">
+                    <h5 class="card-title">Triple Choco Crunch</h5>
+                    <p class="card-text">Une mousse légère et onctueuse en trois couches de chocolat.</p>
+                    <a href="http://localhost/boutique-en-ligne/product_info.php?id_product=6" class="btn btn-primary">Acheter</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php

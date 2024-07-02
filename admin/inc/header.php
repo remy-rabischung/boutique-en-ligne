@@ -13,8 +13,8 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-end">
             <a class="navbar-brand" href="index.php">
-                <img src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-            Shopping Project
+                <img src="./assets/Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="">
+                La Chocolaterie Wonka
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -28,27 +28,27 @@
                         Actions
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="products.php">Management of products</a>
+                            <a class="dropdown-item" href="products.php">Gestion des produits</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="orders.php">Management of orders</a>
+                            <a class="dropdown-item" href="orders.php">Gestion des commandes</a>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Shop</a>
+                        <a class="nav-link" href="../index.php">Boutique</a>
                     </li>
 
                     <!-- Si l'internaute est connecté j'affiche le bouton de déconnexion -->
 
                         <li class="nav-item">
                             <a class="nav-link font-italic" href="../connexion.php?action=deconnexion">
-                                Disconnection
+                                Déconnexion
                             </a>
                         </li>
 
                     <form class="form-inline my-2 my-lg-0" method="get" action="result.php">
                         <input class="form-control mr-sm-2" type="search" name="key_word" placeholder="Enter a key word" aria-label="Search">
-                        <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-dark my-2 my-sm-0" type="submit">Rechercher</button>
                     </form>
                 </ul>
             </div>

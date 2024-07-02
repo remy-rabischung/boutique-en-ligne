@@ -1,8 +1,3 @@
-.lobster-two-regular {
-    font-family: "Lobster Two", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
 
 
 /* COMMON CLASSES */
@@ -41,4 +36,42 @@ main {
 
 footer {
     min-height: 20vh;
+}
+
+.footer-bg {
+    background-image: url('../assets/footer.jpg'); /* Remplacez 'path_to_your_image.jpg' par le chemin de votre image */
+    background-size: cover; /* Ajuste l'image pour couvrir entièrement le footer */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    padding-top: 4rem; /* Ajustez la hauteur de votre footer */
+    padding-bottom: 4rem; /* Ajustez la hauteur de votre footer */
+}
+
+.header-bg {
+    /* background-image: url('../assets/login.png'); Remplacez 'path_to_your_image.jpg' par le chemin de votre image */
+    background-size: cover; /* Ajuste l'image pour couvrir entièrement le footer */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    padding-top: 4rem; /* Ajustez la hauteur de votre footer */
+    padding-bottom: 4rem; /* Ajustez la hauteur de votre footer */
+}
+
+main {
+    background-image: url('../assets/wonka1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 0;
+}
+.card-custom {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.card-body {
+    flex: 1;
+}
+.card img {
+    height: 200px;
+    object-fit: cover;
 }

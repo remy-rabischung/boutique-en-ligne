@@ -2,30 +2,36 @@
 
 require_once("inc/init.php");
 
+if(!userConnected()) {
+    header("location:connection.php");
+    exit();
+}
+
 require_once("inc/header.php");
+
 ?>
 
 <div class="col-md-12 mb-5">
-    <h2 class="text-center">Hi habbani sam , welcome to your profile !</h2>
+    <h2 class="text-center">Salutations <?= $_SESSION["member"]["first_name"] . " " . $_SESSION["member"]["name"] ?> , bienvenue sur votre profil !</h2>
 </div>
 
 <div class="card col-md-4">
     <img src="pictures/avatar_male.png" class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title">habbani sam</h5>
+        <h5 class="card-title"><?= $_SESSION["member"]["first_name"] . " " . $_SESSION["member"]["name"] ?></h5>
     </div>
 
     <ul class="list-group list-group-flush">
-        <li class="list-group-item text-center">samihhabbani@gmail.com</li>
-        <li class="list-group-item text-center">26 rue d'acy</li>
-        <li class="list-group-item text-center">02200 Sepmtonts</li>
+        <li class="list-group-item text-center"><?= $_SESSION["member"]["email"] ?></li>
+        <li class="list-group-item text-center"><?= $_SESSION["member"]["address"] ?></li>
+        <li class="list-group-item text-center"><?= $_SESSION["member"]["postal_code"] . " " . $_SESSION["member"]["city"] ?></li>
     </ul>
 </div>
 
 <div class="col-md-4">
     <ul class="list-group">
         <li class="list-group-item text-center">
-            <h5>My orders</h5>
+            <h5>Mes commandes</h5>
         </li>
 
             </ul>
