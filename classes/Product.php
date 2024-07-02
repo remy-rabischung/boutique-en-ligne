@@ -9,6 +9,14 @@ class Product{
         $this->database = new Database();
     }
 
+    public function searchProduct($searchTerm){
+        $statement = $this->database->pdo->prepare("SELECT * FROM produit WHERE nom LIKE :searchTerm OR description LIKE :searchTerm");
+        $statement->execute(['searchTerm' => "%$searchTerm%"]);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        echo json_encode($results);
+    }
+
     public function getAllProducts(){
         $sql = "SELECT * FROM produit";
         $stmt = $this->database->pdo->query($sql);

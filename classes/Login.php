@@ -43,7 +43,7 @@ class Login{
     }
     
     private function getUser($email){
-        $sql = 'SELECT email, mdp, admin FROM utilisateur WHERE email = ?';
+        $sql = 'SELECT id, email, mdp, admin FROM utilisateur WHERE email = ?';
         $stmt = $this->database->pdo->prepare($sql);
         $stmt->execute([$email]);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);

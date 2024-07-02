@@ -37,7 +37,7 @@
                 document.querySelector('#errors_list').innerHTML = response.errors.map(error => `<li>${error}</li>`).join('')
             }
             else{
-                setCookie('logged', 'true', 1);
+                setCookie('logged', response.user.id, 1);
                 if(response.user.admin === 1){
                     setCookie('admin', 'true', 1);
                 }
