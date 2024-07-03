@@ -27,7 +27,7 @@
     <div class="text-center text-light">
         <h1>Bienvenue chez Wonka!</h1>
         <p>Tentez votre chance en achetant des Tablettes Wonka pour gagner un Ticket d'Or!</p>
-        <img src="assets/golden-ticket.png" alt="Ticket d'Or" class="img-fluid w-50"><br><br><br>
+        <img src="assets/golden-ticket.png" alt="Ticket d'Or" class="img-fluid w-25"><br><br><br>
         <a href="shop.php" class="btn btn-primary btn-lg">Visitez la boutique</a>
     </div>
 </div>

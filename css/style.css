@@ -1,3 +1,12 @@
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+p, a {
+    font-family: 'Roboto';
+    text-shadow: 0px 0px 1px black;
+}
 
 
 /* COMMON CLASSES */
@@ -6,16 +15,23 @@
     position: relative;
 }
  
+h1, h2 {
+    font-family: 'Lobster Two', cursive;
+    text-shadow: #FC0 1px 0 5px;
+}
 
 /* NAV */
 #navBar {
     width: 100%;
 }
 
-.nav-link.active, .nav-link:hover {
-    color: white; /* Texte en blanc */
-    background-color:  #DCB253; /* Fond bleu */
-    border-radius: 60%;
+.navbar-nav .nav-link {
+    color: #DCB253 !important; /* Couleur de texte blanche */
+    font-family: 'Roboto', sans-serif; /* Police Roboto */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #5a3a22 !important; /* Couleur de texte au survol */
 }
 
 .number_elem_in_cart {
@@ -30,10 +46,6 @@
     text-align: center;
     font-size: 10px;
     line-height: 20px;
-}
-
-nav {
-    min-height: 10vh;
 }
 
 main {
@@ -58,7 +70,7 @@ footer {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 50px 0;
+    padding: 20% 0;
 }
 
 #index2 {

@@ -10,14 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <title>Wonka</title>
 </head>
 
 <body>
-
-        <nav class="navbar navbar-expand-lg navbar-light text-dark header-bg">
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
             <a class="navbar-brand" href="index.php">
-                <img src="./assets/Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="Logo Wonka">
+                <img src="./assets/Wonka-logo.png" width="180" height="75" class="d-inline-block align-top" alt="Logo Wonka">
             </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -61,6 +62,4 @@
                 </ul>
             </div>
         </nav>
-
-        <!-- <main class="bg-light p-5">
-            <div class="row col-md-10 mx-auto justify-content-center"> -->
+    </header>
