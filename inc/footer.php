@@ -1,6 +1,4 @@
 <!-- ROW -->
-</div>
-</main>
 
 <footer class="bg-dark page-footer font-small blue pt-4 footer-bg">
 

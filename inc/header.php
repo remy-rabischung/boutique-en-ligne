@@ -17,8 +17,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-light text-dark header-bg">
             <a class="navbar-brand" href="index.php">
-                <img src="./assets/Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="">
-                La Chocolaterie Wonka
+                <img src="./assets/Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="Logo Wonka">
             </a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -53,12 +52,15 @@
                         </li>
                     <?php } ?>   
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin/index.php">Panel Admin</a>
-                    </li>
+                    <?php if(adminConnected()) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin/index.php">Panel Admin</a>
+                        </li>
+                    <?php } ?>
+
                 </ul>
             </div>
         </nav>
 
-        <main class="bg-light p-5">
-            <div class="row col-md-10 mx-auto justify-content-center">
+        <!-- <main class="bg-light p-5">
+            <div class="row col-md-10 mx-auto justify-content-center"> -->

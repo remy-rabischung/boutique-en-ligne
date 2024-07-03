@@ -102,6 +102,14 @@
 
     }
 
+    function adminConnected() {
+        // Vérifie si l'utilisateur est connecté et si son statut est égal à 2
+        if (isset($_SESSION["member"]["status"]) && $_SESSION["member"]["status"] == 2) {
+            return true;
+        }
+        return false;
+    }    
+    
     function pagination($pdo, $URLparam, $sqlText, $column, $nbrElemPerPage) {
 
         if(isset($_GET[$URLparam]) && !empty($_GET[$URLparam])) {

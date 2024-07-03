@@ -3,8 +3,13 @@
 require_once("inc/init.php");
 
 
-if(isset($_GET["action"]) && $_GET["action"] == "disconnection") {
-    unset($_SESSION["member"]);
+if (isset($_GET['action']) && $_GET['action'] == 'disconnection') {
+    // Destruction de la session
+    session_unset();
+    session_destroy();
+    $_SESSION = array(); // Réinitialisation du tableau de session
+    header("Location: index.php"); // Redirection vers la page d'accueil ou une autre page après déconnexion
+    exit();
 }
 
 if(userConnected()) {
@@ -34,7 +39,7 @@ if($_POST) {
             $_SESSION["member"]["city"] = $member["city"];
             $_SESSION["member"]["status"] = $member["status"];
 
-            if($_SESSION["member"]["status"] == 1) {
+            if($_SESSION["member"]["status"] == 2) {
                 header("location:admin/index.php");
             } else {
                 header("location:profile.php");
@@ -64,24 +69,54 @@ require_once("inc/header.php");
 
 <?= $content; ?>
 
-<div class="col-md-12">
-    <h3 class="text-center mb-5"> Connectez-vous pour accéder à votre profil !</h3>
-</div>
+<section class="vh-200" style="background-image: url('assets/login.png');">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="assets/logo2.png"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
 
-<div class="col-md-5">
-    <form method="POST" action="">
-        <div class="form-group">
-            <label for="pseudo">Pseudo:</label>
-            <input type="text" name="pseudo" class="form-control" id="pseudo" aria-describedby="pseudo" placeholder="Entrez votre pseudo">
-        </div>
-        <div class="form-group">
-            <label for="password">Mot de passe</label>
-            <input type="password" name="pwd" class="form-control" id="password" placeholder="Entrez votre mot de passe">
-        </div>
-        <button type="submit" class="btn btn-dark">Connexion</button>
-    </form>
-</div>
+                <form method="POST" action="">
 
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <img src="assets/oompaloompa.gif" class="">
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez-vous à votre compte</h5>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="text" name="pseudo" class="form-control form-control-lg" id="pseudo" aria-describedby="pseudo" placeholder="Entrez votre pseudo"/>
+                    <label class="form-label" for="pseudo">Nom d'utilisateur</label>
+                  </div>
+
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <input type="password" name="pwd" class="form-control form-control-lg" id="password" placeholder="Entrez votre mot de passe"/>
+                    <label class="form-label" for="password">Mot de passe</label>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" type="submit">Se Connecter</button>
+                  </div>
+
+                  <a class="small text-muted" href="connection.php">Mot de passe oublié ?</a>
+                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Vous n'avez pas encore de compte ? <a href="registration.php"
+                      style="color: #393f81;">Inscrivez-vous ici !</a></p>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <?php
 require_once("inc/footer.php");

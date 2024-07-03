@@ -44,6 +44,9 @@ if (isset($_SESSION["cart"])) {
     if (isset($_POST["payer"])) {
         $error = false;
 
+        // Récupère l'ID de l'utilisateur connecté depuis la session
+        $idMember = $_SESSION["member"]["id_member"] + 1;
+
         for ($i = 0; $i < count($_SESSION["cart"]["id_product"]); $i++) {
             $id_product = $_SESSION['cart']['id_product'][$i];
             $stmt = $pdo->prepare("SELECT * FROM products WHERE id_product = ?");
@@ -70,14 +73,15 @@ if (isset($_SESSION["cart"])) {
         }
 
         if (!$error) {
-            $idMember = 1;
             $total_amount = totalAmount();
 
+            // Insère la commande dans la base de données
             $stmt = $pdo->prepare("INSERT INTO orders(id_member, amount, date, state) VALUES (?, ?, NOW(), 'en traitement')");
             $stmt->execute([$idMember, $total_amount]);
 
             $idOrder = $pdo->lastInsertId();
 
+            // Insère les détails de la commande
             for ($i = 0; $i < count($_SESSION["cart"]["id_product"]); $i++) {
                 $stmt = $pdo->prepare('INSERT INTO order_details (id_product, id_order, quantity, price) VALUES (?, ?, ?, ?)');
                 $stmt->execute([
@@ -87,6 +91,7 @@ if (isset($_SESSION["cart"])) {
                     $_SESSION["cart"]["price"][$i]
                 ]);
 
+                // Met à jour le stock du produit dans la base de données
                 $quantity = $_SESSION["cart"]["quantity"][$i];
                 $id_product = $_SESSION["cart"]["id_product"][$i];
                 $stmt = $pdo->prepare("UPDATE products SET stock = stock - ? WHERE id_product = ?");
@@ -150,7 +155,7 @@ require_once("inc/header.php");
 
 <div class="col-md-12">
     <a class="badge badge-dark" 
-        href="index.php<?= isset($_POST['category']) ? '?category=' . $_POST['category'] : '' ?>">Retourner dans <?= isset($_POST['category']) ? $_POST['category'] : 'la boutique' ?>
+        href="shop.php<?= isset($_POST['category']) ? '?category=' . $_POST['category'] : '' ?>">Retourner dans <?= isset($_POST['category']) ? $_POST['category'] : 'la boutique' ?>
     </a>
 </div>
 

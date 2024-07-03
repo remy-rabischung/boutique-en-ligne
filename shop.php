@@ -1,58 +1,59 @@
 <?php
-    require_once("inc/init.php");
+require_once("inc/init.php");
 
-    //////////////////////////////////////////
-    /////////////// CATEGORIES ///////////////
-    //////////////////////////////////////////
+// Récupération des catégories distinctes
+$stmt = $pdo->query("SELECT DISTINCT(category) FROM products");
 
-    $stmt = $pdo->query("SELECT DISTINCT(category) FROM products");
-
-    //////////////////////////////////////////
-    ////////////// LIST PRODUCTS /////////////
-    //////////////////////////////////////////
-
-    if(isset($_GET['category'])) {
-        $sql = 'SELECT * FROM products WHERE category = :selectedCategory';
-        $query = $pdo->prepare($sql);
-        $query->bindValue(':selectedCategory', $_GET['category'], PDO::PARAM_STR);
-        $query->execute();
-    }
-
-
-
-    require_once("inc/header.php");
+require_once("inc/header.php");
 ?>
 
-<!-- Body content -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <ul class="list-group">
+<!-- Header avec titre -->
+<div class="container-fluid bg-light py-4">
+    <div class="text-center">
+        <h2>Nos Catégories de Produits</h2>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            <ul class="nav justify-content-center">
                 <?php while($category = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                    <li class="list-group-item">
-                        <a class="text-dark" href="?category=<?=$category['category'];?>"> <?= $category['category']; ?></a>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark <?= isset($_GET['category']) && $_GET['category'] == $category['category'] ? 'active' : ''; ?>" href="?category=<?= $category['category']; ?>"><?= $category['category']; ?></a>
                     </li>
                 <?php } ?>
             </ul>
         </div>
+    </div>
+</div>
 
-        <div class="col-md-9">
+<!-- Liste des produits -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
             <div class="row">
                 <?php
                 if(isset($_GET['category'])) {
+                    $sql = 'SELECT * FROM products WHERE category = :selectedCategory';
+                    $query = $pdo->prepare($sql);
+                    $query->bindValue(':selectedCategory', $_GET['category'], PDO::PARAM_STR);
+                    $query->execute();
+
                     while($product = $query->fetch(PDO::FETCH_ASSOC)) { ?>
-                        <div class="col-md-4 pr-2 pl-2 pb-2">
+                        <div class="col-md-4 mb-4">
                             <div class="card h-100">
-                                <img src="<?= $product['picture']; ?>" class="card-img-top" alt="...">
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-center"> <?= $product['title']; ?> </h5>
-                                    <p class="card-text text-center"> <?= $product['description']; ?> </p>
-                                    <a href="product_info.php?id_product=<?= $product['id_product']; ?>" class="btn btn-dark mt-auto">Voir le produit</a>
+                                <img src="<?= $product['picture']; ?>" class="card-img-top" alt="<?= $product['title']; ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center"><?= $product['title']; ?></h5>
+                                    <p class="card-text text-center"><?= $product['description']; ?></p>
+                                    <a href="product_info.php?id_product=<?= $product['id_product']; ?>" class="btn btn-dark d-block mx-auto">Voir le produit</a>
                                 </div>
                             </div>
                         </div>
-                    <?php }} ?>
+                    <?php }
+                } else {
+                    // Affichage par défaut si aucune catégorie sélectionnée
+                    echo '<div class="col-md-12"><p class="text-center">Sélectionnez une catégorie pour afficher les produits.</p></div>';
+                }
+                ?>
             </div>
         </div>
     </div>
