@@ -160,9 +160,15 @@ require_once("inc/header.php");
 </div>
 
 <div class="d-flex justify-content-end col-md-12">
-    <form action="" method="POST">
-        <input type="submit" name="payer" value="Payer" class="btn btn-primary">
-    </form>
+    <?php if (!isset($_SESSION['member'])) { ?>
+        <div class="alert alert-warning" role="alert">
+            Vous devez être <a href="connection.php">connecté</a> pour passer commande. Si vous n'avez pas de compte, veuillez vous <a href="registration.php">inscrire</a>.
+        </div>
+    <?php } else { ?>
+        <form action="" method="POST">
+            <input type="submit" name="payer" value="Payer" class="btn btn-primary">
+        </form>
+    <?php } ?>
 </div>
 
 <?php
