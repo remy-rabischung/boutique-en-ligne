@@ -13,36 +13,36 @@ class Register{
         $errors = [];
 
         if(!strlen($formData->email)){
-            $errors[] = 'Należy podać adres email!';
+            $errors[] = 'You must provide an email address!';
         }
         if(!strlen($formData->password)){
-            $errors[] = 'Należy podać hasło!';
+            $errors[] = 'You must provide a password!';
         }
         if(!strlen($formData->repeat_password)){
-            $errors[] = 'Należy podać powtórzone hasło!';
+            $errors[] = 'You must provide a password again!';
         }
         if(!filter_var($formData->email, FILTER_VALIDATE_EMAIL)){
-            $errors[] = 'Podany email jest nieprawidłowy!';
+            $errors[] = 'The provided email is invalid!';
         }
         if($formData->password !== $formData->repeat_password){
-            $errors[] = 'Podane hasła różnią się!';
+            $errors[] = 'The passwords you provided do not match!';
         }
         if(!strlen($formData->nick)){
-            $errors[] = 'Należy podać nazwe użytkownika!';
+            $errors[] = 'You must provide a user nick!';
         }
         if(!strlen($formData->name)){
-            $errors[] = 'Należy podać imie!';
+            $errors[] = 'You must provide the name!';
         }
         if(!strlen($formData->phone)){
-            $errors[] = 'Należy podać telefon!';
+            $errors[] = 'You must provided a phone number!';
         }
         if(!strlen($formData->address)){
-            $errors[] = 'Należy podać adres!';
+            $errors[] = 'You must provide an addresse!';
         }
 
         if(!count($errors)){
            if($this->checkEmailIsUsed($formData->email) !== 0){
-                $errors[] = 'Istnieje uzytkownik z takim adresem email!';
+                $errors[] = 'There is already a user with this email address!';
            }
         }
 

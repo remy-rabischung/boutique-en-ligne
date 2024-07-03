@@ -20,14 +20,15 @@ $categories = $categoryObject->getAllCategories();
     <title>Document</title>
 </head>
 <body>
-    <select id="category">
-        <option value="all">Wszystkie kategorie</option>
-        <?php
-            foreach($categories as $category){
-                echo "<option value='{$category['id']}'>{$category['nom']}</option>";
-            }
-        ?>
-    </select>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<select id="category" class="form-control">
+    <option value="all">All categories</option>
+    <?php
+        foreach($categories as $category){
+            echo "<option value='{$category['id']}'>{$category['nom']}</option>";
+        }
+    ?>
+</select>
 
     <input list="prodcuts_search_list" id="search_input" />
     <datalist id="prodcuts_search_list">
@@ -38,7 +39,7 @@ $categories = $categoryObject->getAllCategories();
     <ul id="products">
         <?php
             foreach($products as $product){
-                echo "<li data-category={$product['id_categorie']}>{$product['nom']}<a href='/boutique-en-ligne/product.php?id={$product['id']}'>Zobacz</a></li>";
+                echo "<li data-category={$product['id_categorie']}>{$product['nom']}<a href='/boutique-en-ligne/product.php?id={$product['id']}'>Check it out</a></li>";
             }
         ?>
 

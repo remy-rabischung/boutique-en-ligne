@@ -8,14 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../styles/styles.css"/>
+    <link rel="stylesheet" href="styles/styles.css"/>
    
 </head>
 <body>
     <header>
         <nav>
         <div class="header">
-            <img class = "logo" src = " ../assets/images/Wonka-logo.png ">
+            <img class = "logo" src = " assets/images/Wonka-logo.png ">
             <a href= "home page.html"> Home Page</a>
             <a href= "../shop.html"> Shop</a>
             <a href= "../Realisations.html"> About us</a>
@@ -30,7 +30,7 @@
     <form id="registerForm">
         <div class="container">
             <div class="kid1">
-                <img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">
+                <img class="spiral" src="assets/images/spiral.png" alt="picture of spiral">
                 <p>email:</p><input type="email" name="email" /><br><br>
                 <p>password:</p><input type="password" name="password" /><br><br>
                 <p>repeat password:</p><input type="password" name="repeat_password" /><br>
@@ -39,7 +39,7 @@
 
             </div>
             <div class="kid2">
-                <img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">
+                <img class="spiral" src="assets/images/spiral.png" alt="picture of spiral">
                 <p>nick:</p><input type="text" name="nick" /><br><br>
                 <p>name:</p><input type="text" name="name" /><br><br>
                 <p>address:</p><input type="text" name="address" /><br><br>
@@ -72,7 +72,7 @@
             const errorContainer = document.getElementById('errorContainer');
 
             // Czyści poprzednie komunikaty o błędach
-            errorContainer.innerHTML = '<img class="spiral" src="../assets/images/spiral.png" alt="picture of spiral">';
+            errorContainer.innerHTML = '<img class="spiral" src="assets/images/spiral.png" alt="picture of spiral">';
 
             if (response.errors && response.errors.length) {
                 response.errors.forEach(error => {

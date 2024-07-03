@@ -32,4 +32,30 @@ class Basket{
         $stmt->execute([$user_id, $product_id]);
     }
 
+    public function getUserBasket($user_id){
+        $sql = "SELECT product_id FROM panier WHERE user_id = ?";
+        $stmt = $this->database->pdo->prepare($sql);
+        $stmt->execute([$user_id]);
+
+        return $stmt->fetchAll();
+    }
+
+    public function createOrder($total, $user_id){
+        $sql = "INSERT INTO commande (total, statut, id_utilisateur) VALUES (?,?,?)";
+        $stmt = $this->database->pdo->prepare($sql);
+        $stmt->execute([$total, 'paye', $user_id]);
+
+        return $this->database->pdo->lastInsertId();
+    }
+
+    public function createOrderProducts($products, $quantity, $order_id){
+        $sql = "INSERT INTO ligne_commande (quantite, prix_unitaire, id_commande, id_produit) VALUES (?, ?, ?, ?)";
+
+        foreach($products as $key => $product){
+            $stmt = $this->database->pdo->prepare($sql);
+            $stmt->execute([$quantity[$key], $product['prix'], $order_id, $product['id']]);
+        }
+
+    }
+
 }

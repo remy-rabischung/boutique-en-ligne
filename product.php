@@ -10,7 +10,16 @@ $categoryObject = new Category();
 $category = $categoryObject->getCategoryById($product['id_categorie']);
 
 $basket = new Basket();
-;
+
+if(isset($_GET['basket'])){
+    if($basket->isInBasket($_COOKIE['logged'], $product['id'])){
+        $basket->removeFromBasket($_COOKIE['logged'], $product['id']);
+    }
+    else{
+        $basket->addToBasket($_COOKIE['logged'], $product['id']);
+    }
+    header("Location: /boutique-en-ligne/product.php?id={$product['id']}");
+}
 
 ?>
 
@@ -48,11 +57,15 @@ $basket = new Basket();
                             </div>
                             <p class="about"><?php echo $product['description']; ?></p>
                             
+
+
                             <div class="cart mt-4 align-items-center"> 
-                                <?php if($basket->isInBasket($_COOKIE['logged'], $product['id'])): ?>
-                                    <button class="btn btn-danger text-uppercase mr-2 px-4">Remove from cart</button> 
+                                <?php if(!isset($_COOKIE['logged'])): ?>
+                                    <p>Zaloguj się aby dodać do koszyka
+                                <?php elseif($basket->isInBasket($_COOKIE['logged'], $product['id'])): ?>
+                                    <a href='/boutique-en-ligne/product.php?id=<?php echo $product['id']; ?>&basket=1' class="btn btn-danger text-uppercase mr-2 px-4">Remove from cart</a> 
                                 <?php else: ?>
-                                    <button class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> 
+                                    <a href='/boutique-en-ligne/product.php?id=<?php echo $product['id']; ?>&basket=1'  class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</a> 
                                 <?php endif; ?>
 
                                 <i class="fa fa-heart text-muted"></i> 

@@ -13,15 +13,15 @@ class Login{
         $errors = [];
 
         if(!strlen($formData->email)){
-            $errors[] = 'Należy podać adres email!';
+            $errors[] = 'You must provide an email!';
         }
         if(!strlen($formData->password)){
-            $errors[] = 'Należy podać hasło!';
+            $errors[] = 'You must provide a password!';
         }
 
         if(!count($errors)){
             if(!$this->checkPasswordIsCorrect($formData->email, $formData->password)){
-                $errors[] = 'Podany email lub hasło jest niepoprawny!';
+                $errors[] = "The email you've provided is'n correct!";
             }
         }
 

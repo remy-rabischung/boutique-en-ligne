@@ -110,4 +110,14 @@ class Product{
         $stmt = $this->database->pdo->prepare($sql);
         $stmt->execute([$id]);
     }
+
+    public function getProductsByIds($ids){
+        $idsString = str_repeat('?, ', count($ids) - 1) . '?';
+
+        $sql = "SELECT * FROM produit WHERE id IN ($idsString)";
+        $stmt = $this->database->pdo->prepare($sql);
+        $stmt->execute($ids);
+
+        return $stmt->fetchAll();
+    }
 }
