@@ -35,7 +35,7 @@ require_once("inc/header.php");
 ?>
 
 <section style="background-image: url('assets/login.png');">
-<br>
+<br><br><br><br><br>
 <div class="col-md-12 mb-5">
     <h2 class="text-center">Salutations <?= $userFirstName . " " . $userLastName ?>, bienvenue sur votre profil !</h2>
 </div>
@@ -69,7 +69,7 @@ require_once("inc/header.php");
                                 <p class="mb-0">Nom d'utilisateur</p>
                             </div>
                             <div class="col-sm-9">
-                                <p class="text-muted mb-0"><?= $_SESSION["member"]["pseudo"] . " " . $_SESSION["member"]["name"] ?></p>
+                                <p class="text-muted mb-0"><?= $_SESSION["member"]["pseudo"] ?></p>
                             </div>
                         </div>
                         <hr>

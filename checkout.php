@@ -3,7 +3,7 @@ require_once("inc/init.php");
 require 'vendor/autoload.php';
 
 // Initialiser Stripe
-\Stripe\Stripe::setApiKey('your_stripe_secret_key');
+\Stripe\Stripe::setApiKey('sk_test_51PYjoIBZAu5dkXdgYL4Gb9hm8laF2JtYrbt0LSCGJZt11SdqBwgFAA8IRNw3jWuYcnwzCdmlGnoecmzjUD38W6Qg00MsGZOMLH');
 
 // Calculer le montant total du panier
 $totalAmount = totalAmount() * 100; // Stripe travaille en cents
@@ -59,14 +59,14 @@ require_once("inc/header.php");
 ?>
 
 <div class="container mt-5">
-    <h2>Checkout</h2>
+    <h2>Paiement</h2>
     <?php if (isset($error)) { ?>
         <div class="alert alert-danger"><?= $error ?></div>
     <?php } ?>
     <form action="checkout.php" method="post" id="payment-form">
         <div class="form-row">
             <label for="card-element">
-                Credit or debit card
+                Carte de crédit ou de débit
             </label>
             <div id="card-element">
                 <!-- Stripe Elements will create input elements here -->
@@ -76,13 +76,13 @@ require_once("inc/header.php");
             <div id="card-errors" role="alert"></div>
         </div>
 
-        <button class="btn btn-primary mt-3">Submit Payment</button>
+        <button class="btn btn-primary mt-3">Confirmer le paiement</button>
     </form>
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe('your_stripe_publishable_key');
+    var stripe = Stripe('pk_test_51PYjoIBZAu5dkXdgfW98dRHiaE6oz88kcaQTfF7Haw83EdkTc4JKbODN6MOrqWwRmlXwq6fM43VuTM4siXXjc1YF00lerFeZhx');
     var elements = stripe.elements();
 
     var style = {

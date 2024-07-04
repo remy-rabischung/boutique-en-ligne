@@ -18,7 +18,7 @@ if(isset($_GET['id_product'])) {
 require_once("inc/header.php");
 
 ?>
-
+<br><br><br><br>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-6">

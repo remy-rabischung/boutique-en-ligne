@@ -111,11 +111,9 @@ require_once("inc/header.php");
 ?>
 
 <?= $content ?>
-<?php if (!empty($_SESSION['cart'])) { ?>
-    <div class="col-md-12">
-        <a class="badge badge-danger" href="?action=emptyCart">Vider le panier</a>
-    </div>
-<?php } ?>
+
+<br><br><br><br><br><br><br>
+<div class="" style="">
 
 <table class="table my-5">
     <thead>
@@ -158,6 +156,11 @@ require_once("inc/header.php");
         href="shop.php<?= isset($_POST['category']) ? '?category=' . $_POST['category'] : '' ?>">Retourner dans <?= isset($_POST['category']) ? $_POST['category'] : 'la boutique' ?>
     </a>
 </div>
+<?php if (!empty($_SESSION['cart'])) { ?>
+    <div class="col-md-12">
+        <a class="badge badge-danger" href="?action=emptyCart">Vider le panier</a>
+    </div>
+<?php } ?>
 
 <div class="d-flex justify-content-end col-md-12">
     <?php if (!isset($_SESSION['member'])) { ?>
@@ -170,7 +173,8 @@ require_once("inc/header.php");
         </form>
     <?php } ?>
 </div>
-
+</div>
+<br><br><br>
 <?php
 require_once("inc/footer.php");
 ?>

@@ -6,7 +6,7 @@ $stmt = $pdo->query("SELECT DISTINCT(category) FROM products");
 
 require_once("inc/header.php");
 ?>
-
+<br><br><br><br>
 <!-- Header avec titre -->
 <div class="container-fluid bg-light py-4">
     <div class="text-center">
@@ -44,7 +44,7 @@ require_once("inc/header.php");
                                 <div class="card-body">
                                     <h5 class="card-title text-center"><?= $product['title']; ?></h5>
                                     <p class="card-text text-center"><?= $product['description']; ?></p>
-                                    <a href="product_info.php?id_product=<?= $product['id_product']; ?>" class="btn btn-dark d-block mx-auto">Voir le produit</a>
+                                    <a href="product_info.php?id_product=<?= $product['id_product']; ?>" class="btn btn-warning d-block mx-auto">Voir le produit</a>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@ require_once("inc/header.php");
         </div>
     </div>
 </div>
-
+<br><br><br><br>
 <?php
 require_once("inc/footer.php");
 ?>

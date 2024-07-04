@@ -70,6 +70,7 @@ require_once("inc/header.php");
 <?= $content; ?>
 
 <section class="vh-200" style="background-image: url('assets/login.png');">
+<br><br><br><br>
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col col-xl-10">
@@ -88,7 +89,7 @@ require_once("inc/header.php");
                     <img src="assets/oompaloompa.gif" class="">
                   </div>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez-vous à votre compte</h5>
+                  <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Connectez-vous à votre compte</h2>
 
                   <div data-mdb-input-init class="form-outline mb-4">
                     <input type="text" name="pseudo" class="form-control form-control-lg" id="pseudo" aria-describedby="pseudo" placeholder="Entrez votre pseudo"/>

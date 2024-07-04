@@ -96,6 +96,7 @@ require_once("inc/header.php");
                     <form method="POST" action="">
                     <!-- 2 column grid layout with text inputs for the first and last names -->
                     <div class="row">
+                    <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Formulaire d'inscription</h2>
                         <div class="col-md-6 mb-4">
                         <div data-mdb-input-init class="form-outline">
                             <input type="text" class="form-control" name="first_name" id="firstName" placeholder="Entrer votre prénom"/>
