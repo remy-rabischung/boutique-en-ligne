@@ -3,11 +3,11 @@
     font-weight: 500;
     font-style: normal;
 }
-p, a {
+/*p, a {
     font-family: 'Roboto';
     text-shadow: 0px 0px 1px black;
 }
-
+*/
 
 /* COMMON CLASSES */
 
@@ -21,17 +21,47 @@ h1, h2 {
 }
 
 /* NAV */
+
+.navbar-brand img {
+    width: 180px;
+    height: 75px;
+}
+.cart-item {
+    display: flex;
+    align-items: center;
+}
+.cart-item-details {
+    flex-grow: 1;
+}
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+.navbar-nav .nav-item .nav-link {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+}
+.badge-notification {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.dropdown-menu-right {
+    min-width: 300px;
+}
+
 #navBar {
     width: 100%;
 }
 
 .navbar-nav .nav-link {
-    color: #DCB253 !important; /* Couleur de texte blanche */
-    font-family: 'Roboto', sans-serif; /* Police Roboto */
+    color: #DCB253 !important; 
+    font-family: 'Roboto', sans-serif; 
 }
 
 .navbar-nav .nav-link:hover {
-    color: #5a3a22 !important; /* Couleur de texte au survol */
+    color: #5a3a22 !important; 
 }
 
 .number_elem_in_cart {

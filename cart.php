@@ -39,74 +39,6 @@ if (isset($_POST['add_product'])) {
     );
 }
 
-// Payer le panier
-if (isset($_SESSION["cart"])) {
-    if (isset($_POST["payer"])) {
-        $error = false;
-
-        // Récupère l'ID de l'utilisateur connecté depuis la session
-        $idMember = $_SESSION["member"]["id_member"] + 1;
-
-        for ($i = 0; $i < count($_SESSION["cart"]["id_product"]); $i++) {
-            $id_product = $_SESSION['cart']['id_product'][$i];
-            $stmt = $pdo->prepare("SELECT * FROM products WHERE id_product = ?");
-            $stmt->execute([$id_product]);
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($product["stock"] < $_SESSION["cart"]["quantity"][$i]) {
-                if ($product["stock"] <= 0) {
-                    $content .= "<div class=\"col-md-12 alert alert-warning\" role=\"alert\">
-                        Le stock est épuisé pour l'article " . $_SESSION["cart"]["title"][$i] . "!
-                    </div>";
-
-                    deleteProductFromCart($_SESSION["cart"]["id_product"][$i]);
-                    updateIndexProductInCart();
-                    $i--;
-                } else {
-                    $_SESSION["cart"]["quantity"][$i] = $product["stock"];
-                    $content .= "<div class=\"col-md-12 alert alert-warning\" role=\"alert\">
-                        La quantité pour le produit " . $_SESSION["cart"]["title"][$i] . " a été réduite à $product[stock] car le stock était insuffisant pour vos achats !
-                    </div>";
-                }
-                $error = true;
-            }
-        }
-
-        if (!$error) {
-            $total_amount = totalAmount();
-
-            // Insère la commande dans la base de données
-            $stmt = $pdo->prepare("INSERT INTO orders(id_member, amount, date, state) VALUES (?, ?, NOW(), 'en traitement')");
-            $stmt->execute([$idMember, $total_amount]);
-
-            $idOrder = $pdo->lastInsertId();
-
-            // Insère les détails de la commande
-            for ($i = 0; $i < count($_SESSION["cart"]["id_product"]); $i++) {
-                $stmt = $pdo->prepare('INSERT INTO order_details (id_product, id_order, quantity, price) VALUES (?, ?, ?, ?)');
-                $stmt->execute([
-                    $_SESSION["cart"]["id_product"][$i],
-                    $idOrder,
-                    $_SESSION["cart"]["quantity"][$i],
-                    $_SESSION["cart"]["price"][$i]
-                ]);
-
-                // Met à jour le stock du produit dans la base de données
-                $quantity = $_SESSION["cart"]["quantity"][$i];
-                $id_product = $_SESSION["cart"]["id_product"][$i];
-                $stmt = $pdo->prepare("UPDATE products SET stock = stock - ? WHERE id_product = ?");
-                $stmt->execute([$quantity, $id_product]);
-            }
-
-            unset($_SESSION["cart"]);
-
-            $content .= "<div class=\"col-md-12 alert alert-success\" role=\"alert\">
-                Merci pour votre commande ! Numéro de commande : " . $idOrder . "
-            </div>";
-        }
-    }
-}
-
 require_once("inc/header.php");
 ?>
 
@@ -168,9 +100,7 @@ require_once("inc/header.php");
             Vous devez être <a href="connection.php">connecté</a> pour passer commande. Si vous n'avez pas de compte, veuillez vous <a href="registration.php">inscrire</a>.
         </div>
     <?php } else { ?>
-        <form action="" method="POST">
-            <input type="submit" name="payer" value="Payer" class="btn btn-primary">
-        </form>
+        <a href="checkout.php" class="btn btn-primary">Payer</a>
     <?php } ?>
 </div>
 </div>

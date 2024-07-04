@@ -2,6 +2,11 @@
 require_once("inc/init.php");
 require 'vendor/autoload.php';
 
+// Afficher les erreurs PHP pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Initialiser Stripe
 \Stripe\Stripe::setApiKey('sk_test_51PYjoIBZAu5dkXdgYL4Gb9hm8laF2JtYrbt0LSCGJZt11SdqBwgFAA8IRNw3jWuYcnwzCdmlGnoecmzjUD38W6Qg00MsGZOMLH');
 
@@ -59,84 +64,96 @@ require_once("inc/header.php");
 ?>
 
 <div class="container mt-5">
-    <h2>Paiement</h2>
+<br><br><br><br>
+    <h2>Récapitulatif de votre commande</h2>
     <?php if (isset($error)) { ?>
         <div class="alert alert-danger"><?= $error ?></div>
     <?php } ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php for ($i = 0; $i < count($_SESSION['cart']['id_product']); $i++) { ?>
+                <tr>
+                    <td><?= $_SESSION['cart']['title'][$i]; ?></td>
+                    <td><?= $_SESSION['cart']['quantity'][$i]; ?></td>
+                    <td><?= $_SESSION['cart']['price'][$i]; ?>€</td>
+                </tr>
+            <?php } ?>
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td><?= totalAmount(); ?>€</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Informations de paiement</h2>
     <form action="checkout.php" method="post" id="payment-form">
         <div class="form-row">
-            <label for="card-element">
-                Carte de crédit ou de débit
-            </label>
-            <div id="card-element">
-                <!-- Stripe Elements will create input elements here -->
+            <label for="card-element" class="mt-3">Carte de crédit ou de débit</label>
+            <div id="card-element" class="form-control">
+                <!-- A Stripe Element will be inserted here. -->
             </div>
-
-            <!-- Used to display form errors -->
-            <div id="card-errors" role="alert"></div>
+            <!-- Used to display form errors. -->
+            <div id="card-errors" role="alert" class="mt-3 text-danger"></div>
         </div>
-
         <button class="btn btn-primary mt-3">Confirmer le paiement</button>
     </form>
 </div>
 
+<br><br><br><br>
+
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe('pk_test_51PYjoIBZAu5dkXdgfW98dRHiaE6oz88kcaQTfF7Haw83EdkTc4JKbODN6MOrqWwRmlXwq6fM43VuTM4siXXjc1YF00lerFeZhx');
-    var elements = stripe.elements();
-
-    var style = {
-        base: {
-            color: '#32325d',
-            lineHeight: '18px',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
-            fontSize: '16px',
-            '::placeholder': {
-                color: '#aab7c4'
-            }
-        },
-        invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
+var stripe = Stripe('pk_test_51PYjoIBZAu5dkXdgfW98dRHiaE6oz88kcaQTfF7Haw83EdkTc4JKbODN6MOrqWwRmlXwq6fM43VuTM4siXXjc1YF00lerFeZhx');
+var elements = stripe.elements();
+var style = {
+    base: {
+        color: '#32325d',
+        lineHeight: '24px',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+            color: '#aab7c4'
         }
-    };
-
-    var card = elements.create('card', {style: style});
-    card.mount('#card-element');
-
-    card.addEventListener('change', function(event) {
-        var displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
-    });
-
-    var form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        stripe.createToken(card).then(function(result) {
-            if (result.error) {
-                var errorElement = document.getElementById('card-errors');
-                errorElement.textContent = result.error.message;
-            } else {
-                stripeTokenHandler(result.token);
-            }
-        });
-    });
-
-    function stripeTokenHandler(token) {
-        var form = document.getElementById('payment-form');
-        var hiddenInput = document.createElement('input');
-        hiddenInput.setAttribute('type', 'hidden');
-        hiddenInput.setAttribute('name', 'stripeToken');
-        hiddenInput.setAttribute('value', token.id);
-        form.appendChild(hiddenInput);
-        form.submit();
+    },
+    invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
     }
+};
+var card = elements.create('card', {style: style});
+card.mount('#card-element');
+card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+        displayError.textContent = event.error.message;
+    } else {
+        displayError.textContent = '';
+    }
+});
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    stripe.createToken(card).then(function(result) {
+        if (result.error) {
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', result.token.id);
+            form.appendChild(hiddenInput);
+            form.submit();
+        }
+    });
+});
 </script>
 
 <?php

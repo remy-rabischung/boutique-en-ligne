@@ -13,8 +13,8 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-end">
             <a class="navbar-brand" href="index.php">
-                <img src="./assets/Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="">
-                La Chocolaterie Wonka
+                <img src="Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="Logo wonka"/>
+                Page d'Administration
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,6 +31,8 @@
                             <a class="dropdown-item" href="products.php">Gestion des produits</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="orders.php">Gestion des commandes</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="users.php">Gestion des utilisateurs</a>
                         </div>
                     </li>
 
@@ -45,11 +47,6 @@
                                 Déconnexion
                             </a>
                         </li>
-
-                    <form class="form-inline my-2 my-lg-0" method="get" action="result.php">
-                        <input class="form-control mr-sm-2" type="search" name="key_word" placeholder="Enter a key word" aria-label="Search">
-                        <button class="btn btn-dark my-2 my-sm-0" type="submit">Rechercher</button>
-                    </form>
                 </ul>
             </div>
         </nav>
