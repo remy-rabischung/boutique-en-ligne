@@ -32,16 +32,27 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete") {
 if($_POST) {
 
     $fileLoad = false;
+    $picturePath = '';
 
     if(!empty($_FILES) && !empty($_FILES["myPicture"]["name"])) {
 
-        $pictureName = $_POST ["reference"] . "_" . $_FILES["myPicture"]["name"];
+        $pictureName = $_FILES["myPicture"]["name"];
         $picturePath = URL . "assets/" . $pictureName;
         $folderOnServer = SITE_ROOT . "assets/" . $pictureName;
-        copy($_FILES["myPicture"]["tmp_name"], $folderOnServer);
 
-        $fileLoad = true;
-
+        if(!empty($_FILES["myPicture"]["tmp_name"])) {
+            if(copy($_FILES["myPicture"]["tmp_name"], $folderOnServer)) {
+                $fileLoad = true;
+            } else {
+                $content .= "<div class='alert alert-danger' role='alert'>
+                    Erreur lors du téléchargement de l'image.
+                </div>";
+            }
+        } else {
+            $content .= "<div class='alert alert-danger' role='alert'>
+                Le fichier téléchargé est vide.
+            </div>";
+        }
     }
 
     foreach($_POST as $index => $value) {
@@ -150,8 +161,8 @@ require_once("inc/header.php");
 
                 <?php } ?>    
             
-                <td> <a href="?action=modify&amp;id_product=<?= $product["id_product"]; ?>#add_modify"> Modify </a> </td>
-                <td> <a href="?action=delete&amp;id_product=<?= $product["id_product"]; ?>"> Delete </a> </td>
+                <td> <a href="?action=modify&amp;id_product=<?= $product["id_product"]; ?>#add_modify"> Modifier </a> </td>
+                <td> <a href="?action=delete&amp;id_product=<?= $product["id_product"]; ?>"> Supprimer </a> </td>
             </tr>
         <?php } ?>
 
@@ -194,8 +205,6 @@ require_once("inc/header.php");
         </div>
         <div class="w-100"></div>
 
-        <!-- FAIRE VARIABLED LE SELECTED DES INPUTS -->
-
         <div class="custom-file mb-5">
             <input type="file" class="custom-file-input" id="myPicture" name="myPicture">
             <label class="custom-file-label" for="myPicture">Choisissez une image</label>
@@ -220,7 +229,7 @@ require_once("inc/header.php");
 
 </form>
 
-
 <?php
 require_once("inc/footer.php");
 ?>
+

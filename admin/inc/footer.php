@@ -8,41 +8,23 @@
             <div class="row">
                 <div class="col-md-6 mt-md-0 mt-3">
                     <h5 class="text-white text-uppercase">La Chocolaterie Wonka</h5>
-                    <p class="text-white">Bienvenue sur notre boutique en ligne !</p>
+                    <p class="text-white">Bienvenue sur la page d'administration !</p>
                 </div>
                 <hr class="clearfix w-100 d-md-none pb-3">
                 <div class="col-md-3 mb-md-0 mb-3">
                     <h5 class="text-white text-uppercase">Catégories</h5>
                     <ul class="list-unstyled">
                         <li>
-                            <a href="http://localhost/onlineshop_light/index.php?category=Chocolat" class="text-white"> Nos Tablettes</a>
+                            <a href="http://localhost/boutique-en-ligne/admin/products.php" class="text-white"> Gestion des produits</a>
                         </li>
                         <li>
-                            <a href="http://localhost/onlineshop_light/index.php?category=Cr%C3%A9ation" class="text-white"> Nos Créations</a>
+                            <a href="http://localhost/boutique-en-ligne/admin/orders.php" class="text-white"> Gestion des commandes</a>
                         </li>
                         <li>
-                            <a href="http://localhost/onlineshop_light/index.php?category=Confiserie" class="text-white"> Nos Confiseries</a>
+                            <a href="http://localhost/boutique-en-ligne/admin/users.php" class="text-white"> Gestion des utilisateurs</a>
                         </li>
                         <li>
-                            <a href="http://localhost/onlineshop_light/index.php?category=Main%20d%27oeuvre" class="text-white"> Achetez un Oompa Loompa</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-md-3 mb-md-0 mb-3">
-                    <h5 class="text-white text-uppercase">Liens</h5>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="contact.php" class="text-white"> Contact</a>
-                        </li>
-                        <li>
-                            <a href="index.php" class="text-white"> Boutique</a>
-                        </li>
-                        <li>
-                            <a href="cart.php" class="text-white"> Panier</a>
-                        </li>
-                        <li>
-                            <a href="profile.php" class="text-white"> Mon Profil</a>
+                            <a href="http://localhost/boutique-en-ligne/admin/messages.php" class="text-white"> Gestion des messages</a>
                         </li>
                     </ul>
                 </div>

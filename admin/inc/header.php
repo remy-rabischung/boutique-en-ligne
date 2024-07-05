@@ -11,15 +11,14 @@
 
     <div class="container-flud">
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-end">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-center">
             <a class="navbar-brand" href="index.php">
-                <img src="Wonka-logo.png" width="120" height="50" class="d-inline-block align-top" alt="Logo wonka"/>
                 Page d'Administration
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <!-- Si je ne suis pas connecté j'affiche les pages connexion/inscription -->
 
@@ -33,6 +32,8 @@
                             <a class="dropdown-item" href="orders.php">Gestion des commandes</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="users.php">Gestion des utilisateurs</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="messages.php">Gestion des messages</a>
                         </div>
                     </li>
 
@@ -42,11 +43,11 @@
 
                     <!-- Si l'internaute est connecté j'affiche le bouton de déconnexion -->
 
-                        <li class="nav-item">
+                        <!--<li class="nav-item">
                             <a class="nav-link font-italic" href="../connexion.php?action=deconnexion">
                                 Déconnexion
                             </a>
-                        </li>
+                        </li>-->
                 </ul>
             </div>
         </nav>

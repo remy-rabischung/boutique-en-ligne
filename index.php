@@ -1,26 +1,24 @@
 <?php
-    require_once("inc/init.php");
+require_once("inc/init.php");
 
-    //////////////////////////////////////////
-    /////////////// CATEGORIES ///////////////
-    //////////////////////////////////////////
+//////////////////////////////////////////
+/////////////// CATEGORIES ///////////////
+//////////////////////////////////////////
 
-    $stmt = $pdo->query("SELECT DISTINCT(category) FROM products");
+$stmt = $pdo->query("SELECT DISTINCT(category) FROM products");
 
-    //////////////////////////////////////////
-    ////////////// LIST PRODUCTS /////////////
-    //////////////////////////////////////////
+//////////////////////////////////////////
+////////////// LIST PRODUCTS /////////////
+//////////////////////////////////////////
 
-    if(isset($_GET['category'])) {
-        $sql = 'SELECT * FROM products WHERE category = :selectedCategory';
-        $query = $pdo->prepare($sql);
-        $query->bindValue(':selectedCategory', $_GET['category'], PDO::PARAM_STR);
-        $query->execute();
-    }
+if(isset($_GET['category'])) {
+    $sql = 'SELECT * FROM products WHERE category = :selectedCategory';
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':selectedCategory', $_GET['category'], PDO::PARAM_STR);
+    $query->execute();
+}
 
-
-
-    require_once("inc/header.php");
+require_once("inc/header.php");
 ?>
 
 <div class="container-fluid" id="index1">
@@ -47,7 +45,7 @@
     <div class="row mt-5">
         <div class="col-md-4">
             <div class="card card-custom">
-                <img src="assets/file2.png" class="card-img-top img-fluid rounded-3" alt="Creation">
+                <img src="assets/file2.png" class="card-img-top" alt="Creation">
                 <div class="card-body">
                     <h5 class="card-title">Caramel Lava Brownie</h5>
                     <p class="card-text">Un brownie riche et dense avec un cœur coulant de caramel salé, offrant une explosion de saveurs chocolatées et sucrées-salées.</p>
@@ -57,7 +55,7 @@
         </div>
         <div class="col-md-4">
             <div class="card card-custom">
-                <img src="assets/file.png" class="card-img-top img-fluid rounded-3" alt="Bonbon">
+                <img src="assets/file.png" class="card-img-top" alt="Bonbon">
                 <div class="card-body">
                     <h5 class="card-title">Fizzy Fruity Fizzles</h5>
                     <p class="card-text">Ces bonbons pétillants explosent en bouche avec des saveurs de fruits tropicaux.</p>
@@ -67,7 +65,7 @@
         </div>
         <div class="col-md-4">
             <div class="card card-custom">
-                <img src="assets/choco-4.png" class="card-img-top img-fluid rounded-3" alt="Chocolat">
+                <img src="assets/choco-4.png" class="card-img-top" alt="Chocolat">
                 <div class="card-body">
                     <h5 class="card-title">Triple Choco Crunch</h5>
                     <p class="card-text">Un assortiment de gâteaux avec une mousse légère et onctueuse en trois couches de chocolat.</p>
@@ -77,7 +75,6 @@
         </div>
     </div>
 </div>
-
 
 <?php
 require_once("inc/footer.php");

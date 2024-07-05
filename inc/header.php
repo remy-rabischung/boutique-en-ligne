@@ -17,7 +17,7 @@
 </head>
 
 <body>
-<header>
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <!-- Logo avec lien -->
@@ -128,5 +128,5 @@
             </div>
         </nav>
     </header>
-</body>
+
 

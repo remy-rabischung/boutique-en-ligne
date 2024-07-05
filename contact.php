@@ -13,24 +13,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $motive = !empty($_POST['motive']) ? htmlspecialchars($_POST['motive']) : $errors[] = "Le motif est requis.";
     $message_content = !empty($_POST['message']) ? htmlspecialchars($_POST['message']) : $errors[] = "Le message est requis.";
 
+    $id_member = $_SESSION["member"]["id_member"] ?? null;
+
     if (empty($errors)) {
-        $to = "remy.rabischung@laplateforme.io";
-        $from = $email;
-        $subject = "Formulaire de contact";
-        $subject2 = "Copie de votre formulaire de contact";
-        $message = "$first_name $last_name a écrit le message suivant : \n\n$message_content";
-        $message2 = "Ceci est une copie de votre message $first_name \n\n$message_content";
-
-        $headers = "From:" . $from;
-        $headers2 = "From:" . $to;
-
-        // Envoi des emails
-        mail($to, $subject, $message, $headers);
-        mail($from, $subject2, $message2, $headers2);
-
         // Insertion en base de données
         $stmt = $pdo->prepare("INSERT INTO contact (id_member, first_name, last_name, email, phone_number, subject, message, date, state) VALUES (:id_member, :first_name, :last_name, :email, :phone_number, :subject, :message, NOW(), 'new')");
-        $stmt->bindParam(':id_member', $_SESSION["membre"]["id_membre"], PDO::PARAM_INT);
+        $stmt->bindParam(':id_member', $id_member, PDO::PARAM_INT);
         $stmt->bindParam(':first_name', $first_name, PDO::PARAM_STR);
         $stmt->bindParam(':last_name', $last_name, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -48,7 +36,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-$id_membre = (isset($_SESSION["membre"]["id_membre"])) ? $_SESSION["membre"]["id_membre"] : NULL;
+$id_membre = $_SESSION["member"]["id_member"] ?? null;
 
 require_once("inc/header.php");
 ?>
@@ -89,8 +77,8 @@ require_once("inc/header.php");
             <option value="J'ai une question sur une commande !">J'ai une question sur une commande !</option>
             <option value="J'ai une question sur un produit !">J'ai une question sur un produit !</option>
             <option value="Je souhaite contacter le service après vente.">Je souhaite contacter le service après vente.</option>
-            <option value="Je suis fournisseur.">J'ai une question générale.</option>
             <option value="Je suis fournisseur.">Je suis fournisseur.</option>
+            <option value="J'ai une question générale.">J'ai une question générale.</option>
         </select>
     </div>
     <div class="form-group col-md-12">

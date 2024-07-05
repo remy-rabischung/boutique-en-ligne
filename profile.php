@@ -25,13 +25,19 @@ try {
     $stmtAllOrders->bindParam(':userId', $userId, PDO::PARAM_INT);
     $stmtAllOrders->execute();
     $allOrders = $stmtAllOrders->fetchAll(PDO::FETCH_ASSOC);
+
+    // Requête SQL pour récupérer les messages de contact et réponses de l'administrateur
+    $sqlMessages = "SELECT * FROM contact WHERE id_member = :userId ORDER BY date DESC";
+    $stmtMessages = $pdo->prepare($sqlMessages);
+    $stmtMessages->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmtMessages->execute();
+    $messages = $stmtMessages->fetchAll(PDO::FETCH_ASSOC);
+
 } catch (PDOException $e) {
     echo "Erreur SQL : " . $e->getMessage(); // Affiche l'erreur SQL en cas de problème
 }
 
-
 require_once("inc/header.php");
-
 ?>
 
 <section style="background-image: url('assets/login.png');">
@@ -45,7 +51,7 @@ require_once("inc/header.php");
                 <div class="card mb-4">
                     <div class="card-body text-center">
                         <img src="assets/oompaloompa.gif" alt="avatar"
-                            class="rounded-circle img-fluid" style="width: 150px;">
+                            class="rounded-circle img-fluid" style="width: 300px;">
                         <h5 class="my-3"><?= $_SESSION["member"]["first_name"] . " " . $_SESSION["member"]["name"] ?></h5>
                         <p class="text-muted mb-1"><?= $_SESSION["member"]["address"] ?></p>
                         <p class="text-muted mb-4"><?= $_SESSION["member"]["city"] ?></p>
@@ -123,6 +129,32 @@ require_once("inc/header.php");
                                         <li class="list-group-item text-center">
                                             <p>Commande n°<?= $order['id_order'] ?> du <?= $order['date'] ?></p>
                                             <p class="badge badge-primary"><?= $order['state'] ?></p>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-center">Mes messages</h5>
+                                <ul class="list-group">
+                                    <?php foreach ($messages as $message): ?>
+                                        <li class="list-group-item">
+                                            <p><strong>Sujet :</strong> <?= htmlspecialchars($message['subject']) ?></p>
+                                            <p><strong>Message :</strong> <?= htmlspecialchars($message['message']) ?></p>
+                                            <?php if ($message['response']) { ?>
+                                                <p><strong>Réponse :</strong> <?= htmlspecialchars($message['response']) ?></p>
+                                            <?php } else { ?>
+                                                <p><em>En attente de réponse...</em></p>
+                                            <?php } ?>
+                                            <p><small class="text-muted">Envoyé le <?= htmlspecialchars($message['date']) ?></small></p>
+                                            <?php if ($message['response_state'] == 'read') { ?>
+                                                <p><small class="text-muted">Réponse lue le <?= htmlspecialchars($message['date_response']) ?></small></p>
+                                            <?php } ?>
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>
