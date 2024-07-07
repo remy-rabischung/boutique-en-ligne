@@ -10,7 +10,7 @@ class Utils{
 
         foreach($categories as $category){
             echo  '<li>';
-            echo  "{$category['nom']} <a href='/boutique-en-ligne/admin/edit-category.php?id={$category['id']}'>Edytuj</a> <a href='/boutique-en-ligne/admin/categories.php?delete_id={$category['id']}'>Usun</a>";
+            echo  "{$category['nom']} <a href='/boutique-en-ligne/admin/edit-category.php?id={$category['id']}'>Edit</a> <a href='/boutique-en-ligne/admin/categories.php?delete_id={$category['id']}'>Delete</a>";
             if(!empty($category['children'])){
                 self::showCategoryList($category['children']);
             }

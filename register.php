@@ -1,4 +1,8 @@
+
 <?php
+    if(isset($_COOKIE['logged'])){
+        return header('Location: /boutique-en-ligne/index.php');
+    }
 
 ?>
 
@@ -7,30 +11,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles/styles.css"/>
-   
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    h1{
+        font-family: 'WonkaFonts', sans-serif;
+        text-align: center!important;
+    } 
+        @font-face {
+    font-family: 'WonkaFonts';
+    src: url('fonts/WillyWonka.ttf') format('truetype');
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-        <div class="header">
-            <img class = "logo" src = " assets/images/Wonka-logo.png ">
-            <a href= "home page.html"> Home Page</a>
-            <a href= "../shop.html"> Shop</a>
-            <a href= "../Realisations.html"> About us</a>
-            <a href= "..//Contact.html"> Contact</a>
-            <input type="text" id="search" placeholder="Search for products..." onkeyup="searchProducts()">
-            <ul id="results"></ul>
-		</div>
-        </nav>
-
-    </header>
-    <h1>Just a few more steps and you'll <br>find yourself in chocolate madness</h1>   
+    
+    <h1>Just a few more steps and you'll <br>find yourself in chocolate madness</h1>
     <form id="registerForm">
         <div class="container">
             <div class="kid1">
-                <img class="spiral" src="assets/images/spiral.png" alt="picture of spiral">
                 <p>email:</p><input type="email" name="email" /><br><br>
                 <p>password:</p><input type="password" name="password" /><br><br>
                 <p>repeat password:</p><input type="password" name="repeat_password" /><br>
@@ -39,7 +39,6 @@
 
             </div>
             <div class="kid2">
-                <img class="spiral" src="assets/images/spiral.png" alt="picture of spiral">
                 <p>nick:</p><input type="text" name="nick" /><br><br>
                 <p>name:</p><input type="text" name="name" /><br><br>
                 <p>address:</p><input type="text" name="address" /><br><br>
@@ -56,7 +55,7 @@
 
     <script>
         document.getElementById('registerForm').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Zatrzymuje domyślną akcję wysyłania formularza
+            event.preventDefault(); 
 
             const formData = new FormData(this);
             const formProps = Object.fromEntries(formData);
@@ -71,8 +70,7 @@
 
             const errorContainer = document.getElementById('errorContainer');
 
-            // Czyści poprzednie komunikaty o błędach
-            errorContainer.innerHTML = '<img class="spiral" src="assets/images/spiral.png" alt="picture of spiral">';
+         
 
             if (response.errors && response.errors.length) {
                 response.errors.forEach(error => {
@@ -82,7 +80,7 @@
                     errorContainer.appendChild(errorElement);
                 });
             } else {
-                alert('Zostałeś zarejestrowany!');
+                alert('You have been logged!');
                 window.location = '/boutique-en-ligne/login.php';
             }
         });
@@ -103,3 +101,6 @@
     </script>
 </body>
 </html>
+<?php
+include 'includes/footer.php'
+?>

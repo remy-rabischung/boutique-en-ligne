@@ -41,7 +41,7 @@ if(isset($_POST['name'])){
 
     ?>
     <form method="post" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="Nazwa" value="<?php echo $product['nom']; ?>"/>
+        <input type="text" name="name" placeholder="Name" value="<?php echo $product['nom']; ?>"/>
         <textarea name="description" placeholder="description"><?php echo $product['description']; ?></textarea>
         <input type="number" name="price" value="<?php echo $product['prix']; ?>"/>
         <input type="number" name="stock" value="<?php echo $product['stock']; ?>" />
@@ -55,7 +55,7 @@ if(isset($_POST['name'])){
                 }
             ?>
         </select>
-        <button type="submit">Zapisz</button>
+        <button type="submit">Save</button>
     </form>
 </body>
 </html>

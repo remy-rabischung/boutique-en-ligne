@@ -56,12 +56,9 @@ if(isset($_GET['basket'])){
                                 </div>
                             </div>
                             <p class="about"><?php echo $product['description']; ?></p>
-                            
-
-
                             <div class="cart mt-4 align-items-center"> 
                                 <?php if(!isset($_COOKIE['logged'])): ?>
-                                    <p>Zaloguj się aby dodać do koszyka
+                                    <p>Login to add to cart
                                 <?php elseif($basket->isInBasket($_COOKIE['logged'], $product['id'])): ?>
                                     <a href='/boutique-en-ligne/product.php?id=<?php echo $product['id']; ?>&basket=1' class="btn btn-danger text-uppercase mr-2 px-4">Remove from cart</a> 
                                 <?php else: ?>

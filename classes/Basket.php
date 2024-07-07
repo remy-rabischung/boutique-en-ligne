@@ -58,4 +58,10 @@ class Basket{
 
     }
 
+    public function clearUserBasket($user_id){
+        $sql = "DELETE FROM panier WHERE user_id = ?";
+        $stmt = $this->database->pdo->prepare($sql);
+        $stmt->execute([$user_id]);
+    }
+
 }
