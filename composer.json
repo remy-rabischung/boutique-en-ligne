@@ -1,0 +1,21 @@
+{
+    "name": "boutique/boutique-en-ligne",
+    "description": "Un projet de boutique en ligne",
+    "type": "project",
+    "require": {
+        "stripe/stripe-php": "^15.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Boutique\\BoutiqueEnLigne\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rémy",
+            "email": "your-email@example.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
